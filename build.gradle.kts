@@ -14,12 +14,16 @@ repositories {
     google()
 }
 
+
+val pf4jVersion: String by project
+
 dependencies {
-    // Note, if you develop a library, you should use compose.desktop.common.
-    // compose.desktop.currentOs should be used in launcher-sourceSet
-    // (in a separate module for demo project and in testMain).
-    // With compose.desktop.common you will also lose @Preview functionality
     implementation(compose.desktop.currentOs)
+
+    //PF4J
+    implementation(project(":api"))
+    implementation("org.pf4j:pf4j:${pf4jVersion}")
+    implementation("ch.qos.logback:logback-classic:1.4.12")
 }
 
 compose.desktop {

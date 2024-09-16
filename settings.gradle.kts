@@ -10,4 +10,10 @@ pluginManagement {
     }
 }
 
+plugins {
+    id("org.gradle.toolchains.foojay-resolver-convention") version "0.5.0"
+}
+
 rootProject.name = "kmp-pf4j-proof-of-concept"
+include("api")
+include("plugin")
