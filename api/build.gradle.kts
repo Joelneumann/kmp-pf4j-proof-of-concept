@@ -25,16 +25,16 @@ kotlin {
     jvmToolchain(17)
 }
 
-publishing {
-    publications {
-        create<MavenPublication>("mavenJava") {
-            from(components["java"])
-            groupId = "com.github.Joelneumann"
-            artifactId = "kmp-pf4j-proof-of-concept"
-            version = "1.0.0"
+afterEvaluate {
+    publishing {
+        publications {
+            // Creates a Maven publication called "release".
+            create<MavenPublication>("release") {
+                from(components["java"])
+                groupId = "de.Joelneumann.kmp-pf4j-proof-of-concept"
+                artifactId = "api"
+                version = "1.0.0"
+            }
         }
-    }
-    repositories {
-        mavenLocal()
     }
 }
