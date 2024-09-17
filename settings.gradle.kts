@@ -16,4 +16,5 @@ plugins {
 
 rootProject.name = "kmp-pf4j-proof-of-concept"
 include("api")
-include("plugin")
+include("print-plugin")
+include("volume-plugin")
