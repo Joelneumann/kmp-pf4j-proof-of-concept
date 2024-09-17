@@ -13,6 +13,9 @@ import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import de.joelneumann.ActionExtension
 import org.pf4j.DefaultPluginManager
+import org.slf4j.event.KeyValuePair
+import java.awt.Robot
+import java.awt.event.KeyEvent
 import java.nio.file.Paths
 
 @Composable
@@ -34,7 +37,9 @@ fun App(
 
         // Button to perform action
         Button(
-            onClick = { performActions(inputValue) }
+            onClick = {
+                performActions(inputValue)
+            }
         ) {
             Text("Submit")
         }
@@ -46,10 +51,17 @@ fun main() = application {
     pluginManager.loadPlugins()
     pluginManager.startPlugins()
 
-    val actions = pluginManager.getExtensions(ActionExtension::class.java)
+    val actions = pluginManager.getExtensions(ActionExtension::class.java, "de.joelneumann.VolumePlugin")
+
+    val osName = System.getProperty("os.name")
+    println(osName)
 
     val performActions: (Int) -> Unit = { int ->
-        actions.forEach { it.performAction(int) }
+        actions.forEach {
+            val pluginId = pluginManager.whichPlugin(it.javaClass)?.pluginId ?: "Unknown Plugin"
+            println("From Plugin: $pluginId")
+            it.performAction(int)
+        }
     }
 
 
